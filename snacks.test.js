@@ -3,6 +3,7 @@ const {
   createSlug,
   average,
   isPalindrome,
+  findPostById,
 } = require("./snacks.js");
 
 // 🏆 Snack 1
@@ -55,4 +56,40 @@ test("La funzione isPalindrome verifica se una stringa è un palindromo.", () =>
 test("La funzione createSlug lancia un errore se il titolo è vuoto o non valido. ", () => {
   expect(() => createSlug("")).toThrow("Titolo non valido");
   expect(() => createSlug(null)).toThrow("Titolo non valido");
+});
+
+// 🏆 Snack 7
+// Crea un array di oggetti posts, in cui ogni oggetto ha le proprietà id, title e slug.
+// Creare un test che verifichi le seguenti descrizioni:
+// "La funzione findPostById restituisce il post corretto dato l’array di post e l’id"
+// Creare uno o più test aggiuntivi che controllino che la struttura dati passati sia conforme (ogni post ha le proprietà id, title e slug, viene passato un id numerico).
+const posts = [
+  {
+    id: 1,
+    title: "Introduzione a JavaScript",
+    slug: "introduzione-a-javascript",
+  },
+  {
+    id: 2,
+    title: "Come usare React",
+    slug: "come-usare-react",
+  },
+  {
+    id: 3,
+    title: "Guida a Node.js",
+    slug: "guida-a-nodejs",
+  },
+];
+
+test("La funzione findPostById restituisce il post corretto dato l’array di post e l’id ", () => {
+  expect(findPostById(posts, 2)).toEqual({
+    id: 2,
+    title: "Come usare React",
+    slug: "come-usare-react",
+  });
+  expect(findPostById(posts, 4)).toBe(null);
+  expect(() => findPostById(posts, "ciao")).toThrow('"ciao" non è un id');
+  expect(() => findPostById([34, 12], 2)).toThrow(
+    `l'Array posts non è nel formato corretto.`
+  );
 });
