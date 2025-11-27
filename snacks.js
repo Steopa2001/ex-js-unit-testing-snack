@@ -3,7 +3,12 @@ function getInitials(nomeCompleto) {
   return `${nome.charAt(0).toUpperCase()}.${cognome.charAt(0).toUpperCase()}.`;
 }
 
+function createSlug(str) {
+    return str.toLowerCase()
+}
+
 
 module.exports = {
     getInitials,
+    createSlug
 }
